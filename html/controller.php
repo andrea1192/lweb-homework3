@@ -1,7 +1,7 @@
 <?php
 	require_once("session.php");
 	require_once("utils.php");
-	require_once("model.php");
+	require_once("model-db.php");
 	require_once("view.php");
 
 	function check_database() {
