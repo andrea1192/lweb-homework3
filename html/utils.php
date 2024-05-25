@@ -82,4 +82,56 @@
 		return $article;
 	}
 
+	function generate_XHTML($article) {
+		$text = file_get_contents($article);
+		$dtd = DTD_DIR;
+
+		$html = <<<END
+		<?xml version="1.0" encoding="UTF-8"?>
+		<!DOCTYPE html SYSTEM "{$dtd}xhtml1-strict.dtd">
+
+		<html xmlns="http://www.w3.org/1999/xhtml">
+
+			<head>
+				<title>Article</title>
+			</head>
+
+			<body>
+				{$text}
+			</body>
+			
+		</html>
+		END;
+
+		return $html;
+	}
+
+	function get_content_xml($article) {
+		$source = new DOMDocument("1.0", "UTF-8");
+		$source->resolveExternals = true;
+		$source->formatOutput = true;
+
+		$source->loadXML(generate_XHTML($article['path']));
+
+		if (!$source->validate()) {
+			throw new Exception("{$article['path']} non è valido.");
+		}
+
+		$title = $source->getElementsByTagName("h1")->item(0);
+		$body = $source->getElementsByTagName("body")->item(0);
+		$body->removeChild($title);
+
+		$content = "\n";
+
+		foreach ($body->childNodes as $node) {
+
+			if ($node->nodeType == XML_ELEMENT_NODE) {
+
+				$content .= $source->saveXML($node)."\n\n";
+			}
+		}
+
+		return $content;
+	}
+
 ?>

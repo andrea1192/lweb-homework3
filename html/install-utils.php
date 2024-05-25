@@ -1,5 +1,6 @@
 <?php
 	require_once("model-db.php");
+	require_once("model-xml.php");
 
 	function create_database() {
 		global $settings;
@@ -66,7 +67,7 @@
 			create_tables();
 			create_user($username, $password);
 			insert_categories($list);
-			insert_list($list);
+			insert_list_xml($list);
 
 		} catch (mysqli_sql_exception $e) {
 			$errors = true;
@@ -119,6 +120,22 @@
 				$row['title'] = $article['title'];
 
 				insert_article($row); //model
+			}
+		}
+	}
+
+	function insert_list_xml($list) { //model/setup
+
+		foreach ($list as $category => $articles) {
+
+			foreach ($articles as $number => $article) {
+				$art = array();
+
+				$art['category'] = $category;
+				$art['title'] = $article['title'];
+				$art['text'] = get_content_xml($article);
+
+				insert_article_xml($art);
 			}
 		}
 	}
