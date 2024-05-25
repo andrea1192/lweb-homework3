@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT article (title, text)>
+
+<!ATTLIST article
+		name CDATA #REQUIRED
+		category (none|XHTML|CSS) "none">
+
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT text (#PCDATA)>
