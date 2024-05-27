@@ -47,6 +47,7 @@
 			create_database();
 			create_tables();
 			create_user($username, $password);
+			copy_DTDs();
 			insert_list($list);
 
 		} catch (mysqli_sql_exception $e) {
@@ -85,6 +86,22 @@
 			END;
 
 			msg_success($msg);
+		}
+	}
+
+	function copy_DTDs() {
+
+		mkdir(DTD_DIR);
+
+		if ($files = scandir('dtd/')) {
+			$files = array_diff($files, ['.','..']);
+
+			foreach ($files as $file) {
+				$path = "dtd/{$file}";
+
+				if (!is_dir($path))
+					copy($path, DTD_DIR.$file);
+			}
 		}
 	}
 

@@ -62,4 +62,25 @@
 
 		return $art;
 	}
+
+	function update_article($article) {
+		$document = new DOMDocument("1.0", "UTF-8");
+		$document->resolveExternals = true;
+
+		if (!file_exists(XML_DIR."{$article['name']}.xml"))
+			throw new Exception("{$article['name']}.xml non trovato");
+
+		$document->load(XML_DIR."{$article['name']}.xml");
+
+		if (!$document->validate())
+			throw new Exception("{$article}.xml non valido secondo {$document->doctype->systemId}");
+
+		$document->getElementsByTagName("title")->item(0)->nodeValue = $article['title'];
+
+		$cdata = $document->createCDATASection($article['text']);
+		$text = $document->getElementsByTagName("text")->item(0);
+		$text->replaceChild($cdata, $text->firstChild);
+
+		$xml = $document->save(XML_DIR."{$article['name']}.xml");
+	}
 ?>

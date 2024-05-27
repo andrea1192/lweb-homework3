@@ -15,19 +15,19 @@
 
 	$list = [
 		'none' => [
-			['path' => 'static/html/main.html', 'title' => 'Home']
+			['path' => XHTML_DIR.'/main.html', 'title' => 'Home']
 		],
 
 		'XHTML' => [
-			['path' => 'static/html/elementi.html', 'title' => 'Elementi'],
-			['path' => 'static/html/correttezza.html', 'title' => 'Correttezza']
+			['path' => XHTML_DIR.'/elementi.html', 'title' => 'Elementi'],
+			['path' => XHTML_DIR.'/correttezza.html', 'title' => 'Correttezza']
 		],
 
 		'CSS' => [
-			['path' => 'static/html/selettori.html', 'title' => 'Selettori'],
-			['path' => 'static/html/box-model.html', 'title' => 'Box model'],
-			['path' => 'static/html/layout.html', 'title' => 'Layout'],
-			['path' => 'static/html/posizionamento.html', 'title' => 'Posizionamento']
+			['path' => XHTML_DIR.'/selettori.html', 'title' => 'Selettori'],
+			['path' => XHTML_DIR.'/box-model.html', 'title' => 'Box model'],
+			['path' => XHTML_DIR.'/layout.html', 'title' => 'Layout'],
+			['path' => XHTML_DIR.'/posizionamento.html', 'title' => 'Posizionamento']
 		]
 	];
 
