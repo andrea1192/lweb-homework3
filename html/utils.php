@@ -31,14 +31,6 @@
 		return htmlspecialchars("{$URL_path}?{$URL_query}", ENT_XHTML);
 	}
 
-	function get_title($article) { //utils
-		$pattern = '/<h1>([[:alpha:] ]*)<\/h1>/';
-
-		preg_match($pattern, $article, $matches);
-
-		return $matches[1] ?? '';
-	}
-
 	function generate_UID($title) { //utils
 		$pattern = '/[[:^alnum:]]+/';
 
@@ -61,34 +53,13 @@
 		return preg_replace_callback($pattern, 'replacement_code', $text);
 	}
 
-	function strip_title($article) { //utils
-		$title_pattern = '/^[[:space:]]*<h1>[[:alpha:] ]*<\/h1>/';
-		$space_pattern = '/^[[:space:]]*/';
-
-		$parts = preg_split($title_pattern, $article, 2);
-		$parts = preg_split($space_pattern, $parts[1] ?? $parts[0], 2);
-
-		return $parts[1] ?? $parts[0];
-	}
-
-	function scan_article($file) { //utils
-		$text = file_get_contents($file); // Possible SQL injection
-
-		$article = [];
-		$article['title'] = get_title($text);
-		$article['text'] = strip_title($text);
-		$article['name'] = generate_UID($article['title']);
-
-		return $article;
-	}
-
 	function generate_XHTML($article) {
 		$text = file_get_contents($article);
 		$dtd = DTD_DIR;
 
 		$html = <<<END
 		<?xml version="1.0" encoding="UTF-8"?>
-		<!DOCTYPE html SYSTEM "{$dtd}xhtml1-strict.dtd">
+		<!DOCTYPE html SYSTEM "{$dtd}/xhtml1-strict.dtd">
 
 		<html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -106,7 +77,7 @@
 		return $html;
 	}
 
-	function get_content_xml($article) {
+	function get_content($article) {
 		$source = new DOMDocument("1.0", "UTF-8");
 		$source->resolveExternals = true;
 		$source->formatOutput = true;

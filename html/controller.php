@@ -2,6 +2,7 @@
 	require_once("session.php");
 	require_once("utils.php");
 	require_once("model-db.php");
+	require_once("model-xml.php");
 	require_once("view.php");
 
 	function check_database() {
@@ -67,12 +68,35 @@
 		set_message($msg, false);
 	}
 
-	function get_categories() { //model wrapper
-		return select_categories();
+	function get_categories() { //dummy
+		return ['none', 'XHTML', 'CSS'];
 	}
 
-	function get_articles($category) { //model wrapper
-		return select_articles($category);
+	function get_articles($category) { //dummy
+		$articles = array();
+
+		switch ($category) {
+
+			case 'none': $articles = [
+					['name' => 'home', 'title' => 'Home']
+				]; break;
+
+			case 'XHTML': $articles = [
+					['name' => 'elementi', 'title' => 'Elementi'],
+					['name' => 'correttezza', 'title' => 'Correttezza']
+				]; break;
+
+			case 'CSS': $articles = [
+					['name' => 'selettori', 'title' => 'Selettori'],
+					['name' => 'box-model', 'title' => 'Box model'],
+					['name' => 'layout', 'title' => 'Layout'],
+					['name' => 'posizionamento', 'title' => 'Posizionamento']
+				]; break;
+
+			default: break;
+		}
+
+		return $articles;
 	}
 
 	function get_article($article, $encode = true) { //model wrapper

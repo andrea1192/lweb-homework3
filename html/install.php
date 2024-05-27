@@ -61,7 +61,7 @@
 				break;
 
 			case 'Ripristina':
-				restore();
+				restore_db();
 				break;
 
 			default: die ("Azione non valida.");

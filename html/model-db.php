@@ -22,88 +22,6 @@
 		}
 	}
 
-	function insert_article($article) {
-		$connection = connect();
-
-		$article['title'] = $connection->real_escape_string($article['title']);
-		$article['text'] = $connection->real_escape_string($article['text']);
-
-		$sql = <<<END
-		INSERT INTO Pages VALUES
-		('{$article['name']}', 
-			{$article['position']}, 
-			'{$article['category']}', 
-			'{$article['title']}', 
-			'{$article['text']}');
-		END;
-
-		$connection->query($sql);
-	}
-
-	function update_article($article) {
-		$connection = connect();
-
-		$article['title'] = $connection->real_escape_string($article['title']);
-		$article['text'] = $connection->real_escape_string($article['text']);
-
-		$sql = <<<END
-		UPDATE Pages
-		SET title = '{$article['title']}', text = '{$article['text']}'
-		WHERE name = '{$article['name']}';
-		END;
-
-		$connection->query($sql);
-	}
-
-	function insert_categories($list) {
-		$connection = connect();
-		$i = 1;
-
-		foreach ($list as $category => $articles) {
-
-			$sql = "INSERT INTO Categories VALUES ('{$category}', {$i});";
-			$connection->query($sql);
-
-			$i++;
-		}
-	}
-
-	function select_categories() {
-		$connection = connect();
-		$sql = "SELECT name FROM Categories ORDER BY position;";
-		$result = $connection->query($sql);
-
-		$categories = [];
-
-		while ($category = $result->fetch_column()) {
-			$categories[] = $category;
-		}
-
-		return $categories;
-	}
-
-	function select_articles($category) {
-		$connection = connect();
-		$sql = "SELECT name,title FROM Pages WHERE category = '{$category}' ORDER BY position;";
-		$result = $connection->query($sql);
-
-		$articles = [];
-
-		while ($article = $result->fetch_assoc()) {
-			$articles[] = $article;
-		}
-
-		return $articles;
-	}
-
-	function select_article($article) {
-		$connection = connect();
-		$sql = "SELECT title,text FROM Pages WHERE name = '{$article}';";
-		$result = $connection->query($sql);
-
-		return $result->fetch_assoc();
-	}
-
 	function authenticate_user($username, $password) {
 		$connection = connect();
 		$sql = "SELECT user,pass FROM Users WHERE user = '{$username}';";
@@ -144,7 +62,7 @@
 	function tables_exist() {
 		global $settings;
 		$connection = connect();
-		$tables = ['Pages', 'Categories', 'Users'];
+		$tables = ['Users'];
 
 		foreach ($tables as $table) {
 			$sql = "SHOW TABLES WHERE Tables_in_{$settings['db_name']} = '{$table}'";

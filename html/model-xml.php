@@ -5,11 +5,11 @@
 	define('XML_DIR', 'static/xml/');
 	define('XHTML_DIR', 'static/html/');
 
-	function insert_article_xml($article) {
+	function insert_article($article) {
 		$article['name'] = generate_UID($article['title']);
 
 		$imp = new DOMImplementation();
-		$doctype = $imp->createDocumentType('article', '', DTD_DIR.'article.dtd');
+		$doctype = $imp->createDocumentType('article', '', 'dtd/article.dtd');
 		$document = $imp->createDocument('', '', $doctype);
 		$document->encoding = 'UTF-8';
 		$document->resolveExternals = true;
@@ -35,23 +35,23 @@
 		$art->appendChild($text);
 		$text->appendChild($cdata);
 
-		if ($document->validate())
-			print("\n<p>{$article['name']}.xml valido secondo {$document->doctype->systemId}.</p>");
+		if (!$document->validate())
+			throw new Exception("{$article['name']}.xml non valido secondo {$document->doctype->systemId}");
 
 		$xml = $document->save(XML_DIR."{$article['name']}.xml");
 	}
 
-	function select_article_xml($article) {
-		$imp = new DOMImplementation();
-		$doctype = $imp->createDocumentType('article', '', DTD_DIR.'article.dtd');
-		$document = $imp->createDocument('', '', $doctype);
-		$document->encoding = 'UTF-8';
+	function select_article($article) {
+		$document = new DOMDocument("1.0", "UTF-8");
 		$document->resolveExternals = true;
 
-		$document->load("test/{$article}.xml");
+		if (!file_exists(XML_DIR."{$article}.xml"))
+			throw new Exception("{$article}.xml non trovato");
 
-		if ($document->validate())
-			print("\n<p>{$article}.xml valido secondo {$document->doctype->systemId}.</p>");
+		$document->load(XML_DIR."{$article}.xml");
+
+		if (!$document->validate())
+			throw new Exception("{$article}.xml non valido secondo {$document->doctype->systemId}");
 
 		$art = array();
 

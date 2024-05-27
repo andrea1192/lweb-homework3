@@ -18,25 +18,6 @@
 		$connection = connect();
 
 		$sql = <<<'END'
-		CREATE TABLE Categories (
-		name 		VARCHAR(160)	PRIMARY KEY,
-		position 	INT UNSIGNED 	UNIQUE);
-		END;
-		$connection->query($sql);
-
-		$sql = <<<'END'
-		CREATE TABLE Pages (
-		name  		VARCHAR(160) 	PRIMARY KEY,
-		position 	INT UNSIGNED 	NOT NULL,
-		category 	VARCHAR(160) 	NOT NULL,
-		title 		VARCHAR(160)	NOT NULL,
-		text 		TEXT,
-		UNIQUE(position, category),
-		FOREIGN KEY(category) REFERENCES Categories(name));
-		END;
-		$connection->query($sql);
-
-		$sql = <<<'END'
 		CREATE TABLE Users (
 		user 		VARCHAR(160)	PRIMARY KEY,
 		pass 	 	VARCHAR(255)	NOT NULL);
@@ -66,8 +47,7 @@
 			create_database();
 			create_tables();
 			create_user($username, $password);
-			insert_categories($list);
-			insert_list_xml($list);
+			insert_list($list);
 
 		} catch (mysqli_sql_exception $e) {
 			$errors = true;
@@ -84,13 +64,13 @@
 		}
 	}
 
-	function restore() { //setup
+	function restore_db() { //setup
 		global $settings;
 
 		try {
 			$connection = connect(); //model
 
-			$sql = "DROP TABLE IF EXISTS Pages, Categories, Users;";
+			$sql = "DROP TABLE IF EXISTS Users;";
 			$connection->query($sql);
 
 		} catch (mysqli_sql_exception $e) {
@@ -113,29 +93,13 @@
 		foreach ($list as $category => $articles) {
 
 			foreach ($articles as $number => $article) {
-				$row = scan_article($article['path']); //utils
-
-				$row['position'] = $number+1;
-				$row['category'] = $category;
-				$row['title'] = $article['title'];
-
-				insert_article($row); //model
-			}
-		}
-	}
-
-	function insert_list_xml($list) { //model/setup
-
-		foreach ($list as $category => $articles) {
-
-			foreach ($articles as $number => $article) {
 				$art = array();
 
 				$art['category'] = $category;
 				$art['title'] = $article['title'];
-				$art['text'] = get_content_xml($article);
+				$art['text'] = get_content($article);
 
-				insert_article_xml($art);
+				insert_article($art);
 			}
 		}
 	}
