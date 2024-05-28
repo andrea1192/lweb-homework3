@@ -91,7 +91,8 @@
 
 	function copy_DTDs() {
 
-		mkdir(DTD_DIR);
+		if (!is_dir(DTD_DIR))
+			mkdir(DTD_DIR);
 
 		if ($files = scandir('dtd/')) {
 			$files = array_diff($files, ['.','..']);
