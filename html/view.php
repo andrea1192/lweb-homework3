@@ -4,6 +4,8 @@
 	define('DEFAULT_VIEW', 'display.php');
 	define('DEFAULT_CONTENT', 'home');
 
+	header('Content-Type: application/xhtml+xml');
+
 	$current = $_GET['page'] ?? DEFAULT_CONTENT;
 
 	$message = '';
