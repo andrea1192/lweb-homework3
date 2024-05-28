@@ -15,6 +15,9 @@
 		$document->resolveExternals = true;
 		$document->formatOutput = true;
 
+		$css = $document->createProcessingInstruction('xml-stylesheet', 'type="text/css" href="dtd/article.css"');
+		$document->appendChild($css);
+
 		$art = $document->createElement("article");
 		$document->appendChild($art);
 

@@ -1,0 +1,32 @@
+:root {
+	--borders-color: rgb(210, 210, 215);
+	--menu-text-color: rgb(100, 100, 100);
+}
+
+article {
+	width: 40%;
+	min-width: 768px;
+	margin: 20px auto;
+	border: 1px solid var(--borders-color);
+	padding: 20px;
+	font-family: system-ui, sans-serif;
+}
+
+article> *:first-child {
+	margin-top: 0;
+}
+
+title, text {
+	display: block;
+	margin: 20px 0;
+}
+
+title {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+text::before {
+	content: "Codice: ";
+	font-weight: bold;
+}
