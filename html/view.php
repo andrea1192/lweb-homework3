@@ -52,8 +52,9 @@
 			print("<ul>");
 
 			foreach (get_articles($category) as $article) {
-				$href = generate_link(page:$article['name']);
-				print("<li><a {$href}>{$article['title']}</a></li>\n");
+				$href = generate_link(page:$article);
+				$title = get_article($article)['title'];
+				print("<li><a {$href}>{$title}</a></li>\n");
 			}
 
 			print("</ul>");

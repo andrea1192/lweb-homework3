@@ -78,19 +78,19 @@
 		switch ($category) {
 
 			case 'none': $articles = [
-					['name' => 'home', 'title' => 'Home']
+					'home'
 				]; break;
 
 			case 'XHTML': $articles = [
-					['name' => 'elementi', 'title' => 'Elementi'],
-					['name' => 'correttezza', 'title' => 'Correttezza']
+					'elementi',
+					'correttezza'
 				]; break;
 
 			case 'CSS': $articles = [
-					['name' => 'selettori', 'title' => 'Selettori'],
-					['name' => 'box-model', 'title' => 'Box model'],
-					['name' => 'layout', 'title' => 'Layout'],
-					['name' => 'posizionamento', 'title' => 'Posizionamento']
+					'selettori',
+					'box-model',
+					'layout',
+					'posizionamento'
 				]; break;
 
 			default: break;
