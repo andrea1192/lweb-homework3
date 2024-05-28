@@ -5,7 +5,7 @@
 		global $current;
 
 		try {
-			$article = get_article($current, encode: false);
+			$article = get_article($current);
 			$edit_link = generate_link(view:'edit.php', page:$current);
 
 		} catch (Exception $e) {

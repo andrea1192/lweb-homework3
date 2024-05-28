@@ -99,23 +99,15 @@
 		return $articles;
 	}
 
-	function get_article($article, $encode = true) { //model wrapper
+	function get_article($article) { //model wrapper
+		$article = select_article($article);
 
-		if (empty($article = select_article($article)))
-			throw new Exception();
-
-		if ($encode) {
-			$article['text'] = htmlspecialchars($article['text'], ENT_XHTML);
-		}
+		$article['title'] = htmlspecialchars($article['title'], ENT_QUOTES | ENT_XHTML);
 
 		return $article;
 	}
 
 	function save_article($article) {
-		$article['title'] = htmlspecialchars($article['title'], ENT_QUOTES | ENT_XHTML);
-		$article['text'] = htmlspecialchars_decode($article['text'], ENT_XHTML);
-		$article['text'] = fix_sample_code($article['text']);
-
 		update_article($article); //model
 	}
 

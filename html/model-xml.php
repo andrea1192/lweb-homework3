@@ -75,7 +75,7 @@
 		if (!$document->validate())
 			throw new Exception("{$article}.xml non valido secondo {$document->doctype->systemId}");
 
-		$document->getElementsByTagName("title")->item(0)->nodeValue = $article['title'];
+		$document->getElementsByTagName("title")->item(0)->firstChild->nodeValue = $article['title'];
 
 		$cdata = $document->createCDATASection($article['text']);
 		$text = $document->getElementsByTagName("text")->item(0);

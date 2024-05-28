@@ -19,7 +19,7 @@
 			<h1><input name="title" value="{$article['title']}" /></h1>
 
 			<div>
-				<textarea name="text" rows="40" cols="75">{$article['text']}</textarea>
+				<textarea name="text" rows="40" cols="75"><![CDATA[{$article['text']}]]></textarea>
 				<input type="submit" value="Salva" />
 			</div>
 		</form>
