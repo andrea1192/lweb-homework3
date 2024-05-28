@@ -40,19 +40,6 @@
 		return $UID;
 	}
 
-	function fix_sample_code($text) { //utils
-		$pattern = '/<code([^>]*)>(.*?)<\/code>/s';
-
-		function replacement_code($matches) {
-			$content = htmlspecialchars($matches[2], ENT_XHTML);
-			$element = "<code{$matches[1]}>{$content}</code>";
-
-			return $element;
-		}
-
-		return preg_replace_callback($pattern, 'replacement_code', $text);
-	}
-
 	function generate_XHTML($article) {
 		$text = file_get_contents($article);
 		$dtd = DTD_DIR;
