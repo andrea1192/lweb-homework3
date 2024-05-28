@@ -7,7 +7,7 @@
 
 	function check_database() {
 		try {
-			if (!database_exists() || !tables_exist()) throw new Exception();
+			if (!database_exists() || !tables_exist() || !articles_exist()) throw new Exception();
 
 		} catch (Exception $e) {
 			header('Location:'.rewrite_URL('install.php', action:'db_issues', encode: false));

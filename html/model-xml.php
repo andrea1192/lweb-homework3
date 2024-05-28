@@ -83,4 +83,21 @@
 
 		$xml = $document->save(XML_DIR."{$article['name']}.xml");
 	}
+
+	function articles_exist() {
+		try {
+
+			foreach (get_categories() as $category) {
+				foreach (get_articles($category) as $article) {
+
+					get_article($article);
+				}
+			}
+		
+		} catch (Exception $e) {
+			return false;
+		}
+
+		return true;
+	}
 ?>
