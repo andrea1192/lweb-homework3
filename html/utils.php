@@ -42,11 +42,10 @@
 
 	function generate_XHTML($article) {
 		$text = file_get_contents($article);
-		$dtd = DTD_DIR;
 
 		$html = <<<END
 		<?xml version="1.0" encoding="UTF-8"?>
-		<!DOCTYPE html SYSTEM "{$dtd}/xhtml1-strict.dtd">
+		<!DOCTYPE html SYSTEM "dtd/xhtml1-strict.dtd">
 
 		<html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -60,6 +59,10 @@
 			
 		</html>
 		END;
+
+		$html = preg_replace("/^[[:blank:]]*/m", '', $html);
+		$html = preg_replace("/^\R/m", '', $html);
+		$html = preg_replace("/>\R/", '>', $html);
 
 		return $html;
 	}
