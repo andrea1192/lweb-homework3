@@ -57,7 +57,7 @@
 		$text->appendChild($cdata);
 
 		if (!validate_article($document))
-			throw new Exception("{$article['name']}.xml non valido secondo {$document->doctype->systemId}");
+			throw new Exception("{$article['name']}.xml non valido");
 
 		$xml = $document->save(XML_DIR."{$article['name']}.xml");
 	}
@@ -72,7 +72,7 @@
 		$document->load(XML_DIR."{$article}.xml");
 
 		if (!validate_article($document))
-			throw new Exception("{$article}.xml non valido secondo {$document->doctype->systemId}");
+			throw new Exception("{$article}.xml non valido");
 
 		$art = array();
 
@@ -94,7 +94,7 @@
 		$document->load(XML_DIR."{$article['name']}.xml");
 
 		if (!validate_article($document))
-			throw new Exception("{$article}.xml non valido secondo {$document->doctype->systemId}");
+			throw new Exception("{$article}.xml non valido");
 
 		$document->getElementsByTagName("title")->item(0)->firstChild->nodeValue = $article['title'];
 

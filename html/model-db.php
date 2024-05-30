@@ -17,7 +17,7 @@
 			return $connection ?? new mysqli($db_host, $db_user, $db_pass, $db_name);
 
 		} catch (mysqli_sql_exception $e) {
-			log_error($e);
+			log_error_db($e);
 			throw $e;
 		}
 	}
@@ -40,7 +40,7 @@
 		}
 	}
 
-	function log_error($e) {
+	function log_error_db($e) {
 		msg_failure(
 			"Errore del database: {$e->getMessage()} ({$e->getFile()}:{$e->getLine()})");
 	}

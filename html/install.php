@@ -85,7 +85,7 @@
 			if (!articles_exist()) throw new Exception('Articoli mancanti o non validi');
 
 		} catch (Exception $e) {
-			log_error($e);
+			log_error_db($e);
 		}
 	}
 

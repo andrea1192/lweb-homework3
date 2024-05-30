@@ -53,7 +53,7 @@
 
 		} catch (mysqli_sql_exception $e) {
 			$errors = true;
-			log_error($e);
+			log_error_db($e);
 		} 
 
 		if (!isset($errors)) {
@@ -77,7 +77,7 @@
 
 		} catch (mysqli_sql_exception $e) {
 			$errors = true;
-			log_error($e);
+			log_error_db($e);
 		} 
 
 		if (!isset($errors)) {
