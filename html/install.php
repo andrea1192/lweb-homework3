@@ -49,6 +49,14 @@
 		}
 	}
 
+	function checked_XML($label) {
+		$choice = $_POST['xml'] ?? 'DTD';
+		$choice = strtolower($choice);
+		$label = strtolower($label);
+
+		return ($label == $choice) ? 'checked="checked"' : '';
+	}
+
 	if (isset($_POST['action'])) {
 
 		switch ($_POST['action']) {
@@ -106,8 +114,8 @@
 			</div>
 			<div id="xml">
 				<h1>Controllo XML:</h1>
-				<label><input type="radio" name="xml" value="DTD" checked="checked" />DTD</label>
-				<label><input type="radio" name="xml" value="Schema" />Schema</label>
+				<label><input type="radio" name="xml" value="DTD" <?= checked_XML('DTD'); ?> />DTD</label>
+				<label><input type="radio" name="xml" value="Schema" <?= checked_XML('Schema'); ?> />Schema</label>
 			</div>
 			<div id="controls">
 				<input type="submit" name="action" value="Installa" />
