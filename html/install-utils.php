@@ -58,7 +58,7 @@
 
 		if (!isset($errors)) {
 			$msg = <<<END
-			<p>Database "{$settings['db_name']}" inizializzato.</p>
+			<p>Contenuto inizializzato.</p>
 			<p><a href="display.php">Vai al sito &gt;&gt;&gt;</a></p>
 			END;
 
@@ -82,7 +82,7 @@
 
 		if (!isset($errors)) {
 			$msg = <<<END
-			<p>Database "{$settings['db_name']}" ripristinato.</p>
+			<p>Contenuto ripristinato.</p>
 			<p>Ora &egrave; possibile ripetere l'installazione.</p>
 			END;
 
