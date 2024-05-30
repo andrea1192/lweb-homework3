@@ -28,6 +28,12 @@
 	font-size: 2em;
 }
 
+#main #article-validation {
+	margin-bottom: 18px;
+	font-size: 0.9em;
+	color: grey;
+}
+
 #main pre {
 	margin-left: 30px;
 }

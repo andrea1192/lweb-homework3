@@ -7,6 +7,7 @@
 		try {
 			$article = get_article($current);
 			$edit_link = generate_link(view:'edit.php', page:$current);
+			$validation = (get_validation() == 'dtd') ? 'DTD' : 'XML Schema' ;
 
 		} catch (Exception $e) {
 			return;
@@ -16,6 +17,9 @@
 		<div id="article-header">
 			<h1>{$article['title']}</h1>
 			<a {$edit_link} title="Modifica questo articolo"></a>
+		</div>
+		<div id="article-validation">
+			&#10003;Articolo validato utilizzando {$validation}
 		</div>
 		{$article['text']}
 		END;
