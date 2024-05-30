@@ -108,10 +108,10 @@
 	function validate_article($document) {
 
 		if (get_validation() == 'dtd')
-			return $document->validate();
+			return @$document->validate();
 
 		else
-			return $document->schemaValidate(DTD_DIR."article.xsd");
+			return @$document->schemaValidate(DTD_DIR."article.xsd");
 	}
 
 	function articles_exist() {

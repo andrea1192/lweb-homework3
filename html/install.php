@@ -74,7 +74,7 @@
 		try {
 			if (!database_exists()) throw new Exception('Database non trovato');
 			if (!tables_exist()) throw new Exception('Tabelle mancanti');
-			if (!articles_exist()) throw new Exception('Articoli mancanti');
+			if (!articles_exist()) throw new Exception('Articoli mancanti o non validi');
 
 		} catch (Exception $e) {
 			log_error($e);

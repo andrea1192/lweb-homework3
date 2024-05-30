@@ -43,21 +43,24 @@
 	}
 
 	function generate_menu() {
+		try {
+			foreach (get_categories() as $category) {
+				if ($category != 'none') {
+					print("<h1>{$category}</h1>\n");
+				}
 
-		foreach (get_categories() as $category) {
-			if ($category != 'none') {
-				print("<h1>{$category}</h1>\n");
+				print("<ul>");
+
+				foreach (get_articles($category) as $article) {
+					$href = generate_link(page:$article);
+					$title = get_article($article)['title'];
+					print("<li><a {$href}>{$title}</a></li>\n");
+				}
+
+				print("</ul>");
 			}
-
-			print("<ul>");
-
-			foreach (get_articles($category) as $article) {
-				$href = generate_link(page:$article);
-				$title = get_article($article)['title'];
-				print("<li><a {$href}>{$title}</a></li>\n");
-			}
-
-			print("</ul>");
+		} catch (Exception $e) {
+			return;
 		}
 	}
 
