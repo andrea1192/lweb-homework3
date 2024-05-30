@@ -21,4 +21,21 @@
 		return isset($_SESSION['user']);
 	}
 
+	function get_validation() {
+		return $_SESSION['validation'] ?? '';
+	}
+
+	function set_validation($validation = 'DTD') {
+
+		switch ($validation) {
+			case 'DTD':
+			case 'schema':
+
+				$_SESSION['validation'] = $validation;
+				break;
+
+			default: break;
+		}
+	}
+
 ?>

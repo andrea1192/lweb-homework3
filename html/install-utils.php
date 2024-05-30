@@ -44,6 +44,8 @@
 		global $settings;
 
 		try {
+			set_validation('schema');
+
 			create_database();
 			create_tables();
 			create_user($username, $password);

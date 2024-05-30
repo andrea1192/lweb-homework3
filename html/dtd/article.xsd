@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:element name="article">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="title" />
+				<xsd:element ref="text" />
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="category" use="optional" default="none">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="none" />
+						<xsd:enumeration value="XHTML" />
+						<xsd:enumeration value="CSS" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="title" type="xsd:string" />
+	<xsd:element name="text" type="xsd:string" />
+</xsd:schema>
