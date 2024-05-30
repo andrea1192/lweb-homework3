@@ -4,9 +4,9 @@
 	$labels = [
 		'db' => [
 			'Host' => 'db_host',
+			'Nome' => 'db_name',
 			'Username' => 'db_user',
-			'Password' => 'db_pass',
-			'Nome' => 'db_name'],
+			'Password' => 'db_pass'],
 
 		'user' => [
 			'Username' => 'app_user',
@@ -98,11 +98,11 @@
 			<div id="credentials">
 				<h1>Credenziali per il database</h1>
 				<p>Estratte da connection.php</p>
-				<?php generate_labels('db', false) ?>
+				<div><?php generate_labels('db', false) ?></div>
 
 				<h1>Utente predefinito</h1>
 				<p>Per provare il login nell'applicazione</p>
-				<?php generate_labels('user') ?>
+				<div><?php generate_labels('user') ?></div>
 			</div>
 			<div id="xml">
 				<h1>Controllo XML:</h1>
