@@ -9,11 +9,9 @@ contenuti sono navigabili utilizzando il menu a sinistra.</p>
 <h2>Funzionamento del sito</h2>
 
 <p>Ciascuna pagina &egrave; generata dinamicamente da uno script PHP, che 
-carica la lista dei contenuti disponibili e quello richiesto da un database.</p>
+carica il contenuto richiesto da un repository di documenti XML.</p>
 
-<p>Il database &egrave; inizializzato dallo script 
-<a href="install.php"><code>install.php</code></a>. Dopo essersi collegato con
-le credenziali inserite in <code>connection.php</code>, questo crea le tabelle
-necessarie ed utilizza una lista di contenuti per popolarle. Per impostazione
-predefinita, questa lista &egrave; integrata nello script ed include contenuti
-prelevati dalla cartella <code>static</code>.</p>
+<p>Il repository &egrave; inizializzato dallo script 
+<a href="install.php"><code>install.php</code></a>, che preleva una lista di
+contenuti di esempio, li converte in XML e valida il risultato secondo un DTD
+oppure uno schema a seconda dell'opzione scelta.</p>
