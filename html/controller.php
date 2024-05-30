@@ -51,6 +51,14 @@
 					$article['title'] = $_POST['title'];
 					$article['text'] = $_POST['text'];
 
+					try {
+						validate_content($article);
+
+					} catch (Exception $e) {
+						log_error_xml($e);
+						return;
+					}
+
 					save_article($article);
 
 					msg_success("Articolo aggiornato con successo.");

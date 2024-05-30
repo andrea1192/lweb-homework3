@@ -40,9 +40,7 @@
 		return $UID;
 	}
 
-	function generate_XHTML($article) {
-		$text = file_get_contents($article);
-
+	function generate_XHTML($content) {
 		$html = <<<END
 		<?xml version="1.0" encoding="UTF-8"?>
 		<!DOCTYPE html SYSTEM "dtd/xhtml1-strict.dtd">
@@ -54,7 +52,7 @@
 			</head>
 
 			<body>
-				{$text}
+				{$content}
 			</body>
 			
 		</html>
@@ -72,9 +70,12 @@
 		$source->resolveExternals = true;
 		$source->formatOutput = true;
 
-		$source->loadXML(generate_XHTML($article['path']));
+		$content = file_get_contents($article['path']);
 
-		if (!$source->validate()) {
+		if (!@$source->loadXML(generate_XHTML($content)))
+			throw new Exception("{$article['path']} non è well-formed.");
+
+		if (!@$source->validate()) {
 			throw new Exception("{$article['path']} non è valido.");
 		}
 
@@ -93,6 +94,23 @@
 		}
 
 		return $content;
+	}
+
+	function validate_content($article) {
+		$source = new DOMDocument("1.0", "UTF-8");
+		$source->resolveExternals = true;
+		$source->formatOutput = true;
+
+		$content = $article['text'];
+
+		if (!@$source->loadXML(generate_XHTML($content)))
+			throw new Exception("Il codice inserito non è well-formed.");
+
+		if (!@$source->validate()) {
+			throw new Exception("Il codice inserito non è valido.");
+		}
+
+		return true;
 	}
 
 ?>

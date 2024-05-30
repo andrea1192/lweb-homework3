@@ -54,7 +54,10 @@
 		} catch (mysqli_sql_exception $e) {
 			$errors = true;
 			log_error_db($e);
-		} 
+		} catch (Exception $e) {
+			$errors = true;
+			log_error_xml($e);
+		}
 
 		if (!isset($errors)) {
 			$msg = <<<END

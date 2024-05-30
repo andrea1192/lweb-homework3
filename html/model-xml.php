@@ -114,6 +114,11 @@
 			return @$document->schemaValidate(DTD_DIR."article.xsd");
 	}
 
+	function log_error_xml($e) {
+		msg_failure(
+			"Errore XML: {$e->getMessage()}");
+	}
+
 	function articles_exist() {
 		try {
 
