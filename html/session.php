@@ -26,9 +26,10 @@
 	}
 
 	function set_validation($validation = 'DTD') {
+		$validation = strtolower($validation);
 
 		switch ($validation) {
-			case 'DTD':
+			case 'dtd':
 			case 'schema':
 
 				$_SESSION['validation'] = $validation;

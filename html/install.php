@@ -56,8 +56,9 @@
 			case 'Installa':
 				$user = $_POST[$labels['user']['Username']];
 				$pass = $_POST[$labels['user']['Password']];
+				$validation = $_POST['xml'];
 
-				install($user, $pass);
+				install($user, $pass, $validation);
 				break;
 
 			case 'Ripristina':
@@ -94,7 +95,7 @@
 
 	<body>
 		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
-			<div id="settings">
+			<div id="credentials">
 				<h1>Credenziali per il database</h1>
 				<p>Estratte da connection.php</p>
 				<?php generate_labels('db', false) ?>
@@ -102,6 +103,11 @@
 				<h1>Utente predefinito</h1>
 				<p>Per provare il login nell'applicazione</p>
 				<?php generate_labels('user') ?>
+			</div>
+			<div id="xml">
+				<h1>Controllo XML:</h1>
+				<label><input type="radio" name="xml" value="DTD" checked="checked" />DTD</label>
+				<label><input type="radio" name="xml" value="Schema" />Schema</label>
 			</div>
 			<div id="controls">
 				<input type="submit" name="action" value="Installa" />

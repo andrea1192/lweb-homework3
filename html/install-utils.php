@@ -39,13 +39,12 @@
 		$connection->query($sql);
 	}
 
-	function install($username, $password) { //setup
+	function install($username, $password, $validation) { //setup
 		global $list;
 		global $settings;
 
 		try {
-			set_validation('schema');
-
+			set_validation($validation);
 			create_database();
 			create_tables();
 			create_user($username, $password);

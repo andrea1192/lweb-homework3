@@ -31,15 +31,26 @@ p {
 	font-size: 0.9em;
 }
 
-label {
+#credentials label,
+#controls label {
 	display: block;
 }
 
-input {
+#credentials input,
+#controls input {
 	display: block;
 	width: 100%;
 	height: 2.5em;
 	margin: 5px 0 10px 0;
+}
+
+#xml h1 {
+	display: inline-block;
+	margin: 4px 10px 0 0;
+}
+
+#xml label {
+	margin-right: 10px;
 }
 
 #controls {

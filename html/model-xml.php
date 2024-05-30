@@ -15,7 +15,7 @@
 
 		$document = null;
 
-		if (get_validation() == 'DTD') {
+		if (get_validation() == 'dtd') {
 			$imp = new DOMImplementation();
 			$doctype = $imp->createDocumentType('article', '', 'dtd/article.dtd');
 			$document = $imp->createDocument('', '', $doctype);
@@ -107,7 +107,7 @@
 
 	function validate_article($document) {
 
-		if (get_validation() == 'DTD')
+		if (get_validation() == 'dtd')
 			return $document->validate();
 
 		else
